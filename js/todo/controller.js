@@ -17,6 +17,24 @@ view.elements.form.addEventListener('submit', function(event) {
 
 })
 
+
+view.elements.tasksList.addEventListener('click', function(event) {
+
+    if (event.target.getAttribute('type') === 'checkbox') {
+        const id = event.target.closest('.todo-item').dataset.id
+        const task = model.findTask(id)
+        model.changeStatus(task)
+        view.changeStatus(task)
+    }
+
+    if (event.target.hasAttribute('data-delete')) {
+        const id = event.target.closest('.todo-item').dataset.id
+        const task = model.findTask(id)
+        model.removeTask(task)
+        view.removeTask(task)
+    }
+})
+
 // model.addTasks('Пить пива')
 // model.addTasks('Пить водку')
 // model.addTasks('Пить ваду')
